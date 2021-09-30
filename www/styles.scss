@@ -1,0 +1,32 @@
+.navbar {
+  margin-bottom: 5px;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: $border-bottom-width; 
+  border-bottom-style: solid; 
+  border-bottom-color: $border-color;
+  background: $primary;
+}
+
+.nav.navbar-nav.shiny-tab-input.shiny-bound-input {
+  margin-left: 30px;
+}
+
+.col-sm-6 {
+  margin-bottom: 220px;
+}
+
+.javier_footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  background: white;
+}
+
+a {
+  color: $secondary;
+  font-weight: bold;
+}

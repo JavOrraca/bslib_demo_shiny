@@ -1,0 +1,11 @@
+library(tidyverse)
+library(rlang)
+library(shiny)
+library(shinyWidgets)
+library(bslib)
+library(thematic)
+library(DT)
+library(leaflet)
+
+file_paths <- fs::dir_ls(c("modules", "helpers"))
+map(file_paths, function(x){source(x)})
