@@ -1,5 +1,6 @@
 fn_custom_theme <- function(){
   bslib::bs_theme(
+    version = "4",
     base_font = font_google("Open Sans"),
     bg = "#fff",
     fg = "#1d2d42",
