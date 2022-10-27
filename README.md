@@ -1,6 +1,8 @@
 # Overview
 
-This R Shiny web app demo, hosted for free on RStudio's [shinyapps.io](https://www.shinyapps.io/), relies on R Shiny modules and the following packages for "Sassy" CSS styling. To visit the live web app, please visit [https://javierorraca.shinyapps.io/Bloomreach_Shiny_App](https://javierorraca.shinyapps.io/Bloomreach_Shiny_App).
+This R Shiny web app demo, hosted for free on RStudio's [shinyapps.io](https://www.shinyapps.io/), relies on R Shiny modules and the following packages for "Sassy" CSS styling.
+
+Visit the live web app at [https://javierorraca.shinyapps.io/Bloomreach_Shiny_App](https://javierorraca.shinyapps.io/Bloomreach_Shiny_App).
 
 ![](./www/Shiny_Demo_Preview.png)
 
