@@ -28,10 +28,10 @@ server_Mapping <- function(id){
       
       output$mymap <- renderLeaflet({
         req(points)
-        leaflet() %>%
+        leaflet() |>
           addProviderTiles(
             "CartoDB.Positron",
-            options = providerTileOptions(noWrap = TRUE)) %>%
+            options = providerTileOptions(noWrap = TRUE)) |>
           addMarkers(data = points())
       })
     }

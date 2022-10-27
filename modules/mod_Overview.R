@@ -29,10 +29,10 @@ server_Overview <- function(id){
     function(input, output, session){
       ns <- session$ns
       
-      diamonds_alt <- diamonds %>% 
+      diamonds_alt <- diamonds |> 
         rename("Revenue" = price,
                "Year" = carat,
-               "Industry" = color) %>% 
+               "Industry" = color) |> 
         mutate(cut = case_when(cut == "Fair" ~ "APAC",
                                cut == "Good" ~ "Europe",
                                cut == "Very Good" ~ "South America",
@@ -46,32 +46,33 @@ server_Overview <- function(id){
                                     Industry == "G" ~ "Brands",
                                     Industry == "H" ~ "Retail",
                                     Industry == "I" ~ "Manufacturers",
-                                    Industry == "J" ~ "Other")
-        ) %>% 
+                                    Industry == "J" ~ "Other")) |> 
         filter(Year <= 2.5)
       
       set.seed(123)
       diamonds_alt_sampled <- diamonds_alt[sample(nrow(diamonds_alt), 5000), ]
       
+      ## To edit the color and font used in the ggplot2 outputs,
+      ## revise the thematic_theme() argument values below
       custom_plot_theme <- thematic_theme(
         bg = "#ffffff",
         fg = "#1d2d42",
         accent = "#f3d436",
-        font = font_spec(font_google("Open Sans"), scale = 1.75)
+        font = font_spec(sass::font_google("Open Sans"), scale = 1.75)
       )
       
       industry_options <- reactive({
         req(diamonds_alt, diamonds_alt_sampled, input$region_select)
         if(input$region_select == "All Regions"){
-          diamonds_alt_sampled %>% 
-            distinct(Industry) %>% 
-            arrange(Industry) %>% 
+          diamonds_alt_sampled |> 
+            distinct(Industry) |> 
+            arrange(Industry) |> 
             pull()
         }else{
-          diamonds_alt %>% 
-            filter(cut == input$region_select) %>% 
-            distinct(Industry) %>% 
-            arrange(Industry) %>% 
+          diamonds_alt |> 
+            filter(cut == input$region_select) |> 
+            distinct(Industry) |> 
+            arrange(Industry) |> 
             pull()
         }
       })
@@ -97,11 +98,12 @@ server_Overview <- function(id){
           thematic_with_theme(
             custom_plot_theme,
             
-            diamonds_alt_sampled %>% 
-              filter(Industry %in% input$industry_line) %>% 
+            diamonds_alt_sampled |> 
+              filter(Industry %in% input$industry_line) |> 
               ggplot(aes(Year, Revenue)) +
               geom_point(alpha = 0.2) +
-              geom_smooth() +
+              geom_smooth(method = 'gam',
+                          formula = y ~ s(x, bs = "cs")) +
               facet_wrap(~ cut) +
               scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2, 2.5),
                                  labels = c(2017, 2018, 2019, 2020, 2021, 2022)) +
@@ -113,12 +115,14 @@ server_Overview <- function(id){
           thematic_with_theme(
             custom_plot_theme,
             
-            diamonds_alt %>% 
+            diamonds_alt |> 
               filter(cut == input$region_select,
-                     Industry %in% input$industry_line) %>% 
+                     Industry %in% input$industry_line) |> 
               ggplot(aes(Year, Revenue, color = Industry)) +
               geom_point(alpha = 0.2) +
-              geom_smooth(se = FALSE) +
+              geom_smooth(method = 'gam',
+                          formula = y ~ s(x, bs = "cs"),
+                          se = FALSE) +
               scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2, 2.5),
                                  labels = c(2017, 2018, 2019, 2020, 2021, 2022)) +
               scale_y_continuous(labels = scales::dollar_format()) +

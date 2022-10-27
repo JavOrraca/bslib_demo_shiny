@@ -17,16 +17,16 @@
   margin-bottom: 220px;
 }
 
-.javier_footer {
+a {
+  color: $primary;
+  font-weight: bold;
+}
+
+footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
   background: white;
-}
-
-a {
-  color: $secondary;
-  font-weight: bold;
+  font-weight: 800;
 }

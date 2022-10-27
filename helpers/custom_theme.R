@@ -6,9 +6,9 @@ fn_custom_theme <- function(){
     fg = "#1d2d42",
     primary = "#f3d436", 
     secondary = "#1d2d42",
-    success = "#1d2d42") %>% 
+    success = "#1d2d42") |> 
     bs_add_variables("border-bottom-width" = "6px",
                      "border-color" = "$primary",
-                     .where = "declarations") %>% 
+                     .where = "declarations") |> 
     bs_add_rules(sass::sass_file("www/styles.scss"))
 }
