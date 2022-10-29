@@ -26,5 +26,5 @@ RUN Rscript -e 'renv::restore()'
 # Expose port
 EXPOSE 4141
 
-# run app on container start
+# Launch Shiny demo app at container runtime
 CMD ["Rscript", "-e", "shiny::runApp('/bslib_demo_shiny', host = '0.0.0.0', port = 4141)"]
