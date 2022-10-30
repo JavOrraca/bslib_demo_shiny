@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # R Project - Assuming end viewer will clone via RStudio IDE -> New Project
 *.Rproj
+
+# RStudio Connect or shinyapps.io publishing metadata
+rsconnect/
