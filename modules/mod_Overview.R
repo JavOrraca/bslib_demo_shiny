@@ -52,14 +52,8 @@ server_Overview <- function(id){
       set.seed(123)
       diamonds_alt_sampled <- diamonds_alt[sample(nrow(diamonds_alt), 5000), ]
       
-      ## To edit the color and font used in the ggplot2 outputs,
-      ## revise the thematic_theme() argument values below
-      custom_plot_theme <- thematic_theme(
-        bg = "#ffffff",
-        fg = "#1d2d42",
-        accent = "#f3d436",
-        font = font_spec(sass::font_google("Open Sans"), scale = 1.75)
-      )
+      # Thematic theme customized in helpers/custom_theme.R
+      custom_plot_theme <- fn_thematic_theme()
       
       industry_options <- reactive({
         req(diamonds_alt, diamonds_alt_sampled, input$region_select)

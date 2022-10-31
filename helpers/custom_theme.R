@@ -1,8 +1,9 @@
-fn_custom_theme <- function(){
+# Overarching bslib theme
+fn_custom_theme <- function() {
   bslib::bs_theme(
     version = "4",
-    base_font = font_google("Open Sans"),
-    bg = "#fff",
+    base_font = bslib::font_google("Open Sans"),
+    bg = "#ffffff",
     fg = "#1d2d42",
     primary = "#f3d436", 
     secondary = "#1d2d42",
@@ -11,4 +12,14 @@ fn_custom_theme <- function(){
                      "border-color" = "$primary",
                      .where = "declarations") |> 
     bs_add_rules(sass::sass_file("www/styles.scss"))
+}
+
+# Thematic theme for ggplot2 outputs
+fn_thematic_theme <- function() {
+  thematic::thematic_theme(
+    bg = "#ffffff",
+    fg = "#1d2d42",
+    accent = "#f3d436",
+    font = font_spec(bslib::font_google("Open Sans"), scale = 1.75)
+  )
 }
