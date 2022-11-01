@@ -5,7 +5,6 @@ FROM rocker/shiny:4.2.1
 ### This Rocker stack builds on Ubuntu LTS for R versions >= 4.0.0.
 ### For R versions <= 3.6.3, Rocker images rely on stable Debian releases.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
     libssl-dev \
     libgdal-dev \ 
     gdal-bin \
@@ -14,10 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install package versions as defined in the renv.lock using R {pak} for faster installation
+## Update system libraries
+RUN apt-get update && apt-get upgrade -y && apt-get clean
+
+# Install specific package versions not already on the rocker/shiny image
 ### Full list of Ubuntu and R packages in rocker/shiny image can be found
 ### here: https://github.com/rocker-org/rocker-versioned2/wiki/shiny_3d52ff3c4f08
 RUN Rscript -e 'install.packages("remotes")'
+RUN Rscript -e 'remotes::install_version("shiny", version = "1.7.3")'
 RUN Rscript -e 'remotes::install_version("dplyr", version = "1.0.10")'
 RUN Rscript -e 'remotes::install_version("purrr", version = "0.3.5")'
 RUN Rscript -e 'remotes::install_version("ggplot2", version = "3.3.6")'
