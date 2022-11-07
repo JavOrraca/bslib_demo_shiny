@@ -2,7 +2,7 @@
 fn_custom_theme <- function() {
   bslib::bs_theme(
     version = "4",
-    base_font = bslib::font_google("Open Sans"),
+    base_font = sass::font_google("Open Sans"),
     bg = "#ffffff",
     fg = "#1d2d42",
     primary = "#f3d436", 
@@ -20,6 +20,6 @@ fn_thematic_theme <- function() {
     bg = "#ffffff",
     fg = "#1d2d42",
     accent = "#f3d436",
-    font = font_spec(bslib::font_google("Open Sans"), scale = 1.75)
+    font = font_spec(sass::font_google("Open Sans"), scale = 1.75)
   )
 }

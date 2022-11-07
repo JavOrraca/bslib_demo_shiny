@@ -96,8 +96,9 @@ server_Overview <- function(id){
               filter(Industry %in% input$industry_line) |> 
               ggplot(aes(Year, Revenue)) +
               geom_point(alpha = 0.2) +
-              geom_smooth(method = 'gam',
-                          formula = y ~ s(x, bs = "cs")) +
+              geom_smooth(method = "loess",
+                          formula = "y ~ x",
+                          se = FALSE) + 
               facet_wrap(~ cut) +
               scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2, 2.5),
                                  labels = c(2017, 2018, 2019, 2020, 2021, 2022)) +
@@ -114,8 +115,8 @@ server_Overview <- function(id){
                      Industry %in% input$industry_line) |> 
               ggplot(aes(Year, Revenue, color = Industry)) +
               geom_point(alpha = 0.2) +
-              geom_smooth(method = 'gam',
-                          formula = y ~ s(x, bs = "cs"),
+              geom_smooth(method = "loess",
+                          formula = "y ~ x",
                           se = FALSE) +
               scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2, 2.5),
                                  labels = c(2017, 2018, 2019, 2020, 2021, 2022)) +
