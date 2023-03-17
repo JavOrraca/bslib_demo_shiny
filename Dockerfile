@@ -21,10 +21,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get clean
 COPY renv.lock /
 
 # Install specific package versions from renv lockfile (renv.lock)
-RUN Rscript -e 'install.packages(c("renv", "remotes", "pak"), repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest")'
+RUN Rscript -e 'install.packages(c("renv", "remotes", "pak"), repos = c(RSPM = "https://packagemanager.rstudio.com/cran/latest", CRAN = "https://cloud.r-project.org"))'
 RUN Rscript -e 'options(renv.config.pak.enabled = TRUE)'
 RUN Rscript -e 'renv::consent(provided = TRUE)'
-RUN Rscript -e 'renv::restore(repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest")'
+RUN Rscript -e 'renv::restore(repos = c(RSPM = "https://packagemanager.rstudio.com/cran/latest", CRAN = "https://cloud.r-project.org"))'
 
 # Make directories and copy files to the image
 RUN mkdir {helpers,modules,www}
